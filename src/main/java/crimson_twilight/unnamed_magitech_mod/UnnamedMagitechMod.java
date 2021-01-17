@@ -1,48 +1,71 @@
 package crimson_twilight.unnamed_magitech_mod;
 
+import crimson_twilight.unnamed_magitech_mod.client.ClientProxy;
+import crimson_twilight.unnamed_magitech_mod.common.CommonProxy;
+import crimson_twilight.unnamed_magitech_mod.common.EventHandler;
+import crimson_twilight.unnamed_magitech_mod.common.UMMContent;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.lifecycle.*;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-@Mod("unnamed_magitech_mod")
+@Mod(UnnamedMagitechMod.MODID)
 public class UnnamedMagitechMod
 {
+    public static final String MODID = "unnamed_magitech_mod";
+    public static final String MODNAME = "Unname Magitech Mod";
+    public static final String VERSION = "${version}";
+    public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+
+    public static final SimpleChannel packetHandler = NetworkRegistry.ChannelBuilder
+            .named(new ResourceLocation(MODID, "main"))
+            .networkProtocolVersion(() -> VERSION)
+            .serverAcceptedVersions(VERSION::equals)
+            .clientAcceptedVersions(VERSION::equals)
+            .simpleChannel();
+
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
-    public UnnamedMagitechMod() {
-        // Register the setup method for modloading
+    public UnnamedMagitechMod()
+    {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+        MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
+        MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
+        UMMContent.modConstruction();
+        proxy.modConstruction();
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        proxy.preInit();
+
+        proxy.preInitEnd();
+        UMMContent.init();
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
+        proxy.init();
+
+        proxy.initEnd();
+        UMMContent.postInit();
+        proxy.postInit();
+
+        proxy.postInitEnd();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event)
@@ -56,12 +79,17 @@ public class UnnamedMagitechMod
     private void processIMC(final InterModProcessEvent event)
     {}
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event)
+    public void loadComplete(FMLLoadCompleteEvent event)
+    {}
+
+    public void serverStarting(FMLServerStartingEvent event)
     {
-        // do something when the server starts
         LOGGER.info("Server starting");
+    }
+
+    public void serverStarted(FMLServerStartedEvent event)
+    {
+        LOGGER.info("Server started");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
