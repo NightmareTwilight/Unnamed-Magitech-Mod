@@ -1,5 +1,7 @@
 package crimson_twilight.unnamed_magitech_mod.common;
 
+import crimson_twilight.unnamed_magitech_mod.api.capability.CapabilityPlayerUseCount;
+
 public class CommonProxy
 {
     public void modConstruction()
@@ -8,6 +10,7 @@ public class CommonProxy
 
     public void preInit()
     {
+        CapabilityPlayerUseCount.register();
     }
 
     public void preInitEnd()
