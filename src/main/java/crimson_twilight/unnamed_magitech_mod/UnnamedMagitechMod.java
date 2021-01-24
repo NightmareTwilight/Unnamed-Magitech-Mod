@@ -6,6 +6,8 @@ import crimson_twilight.unnamed_magitech_mod.common.EventHandler;
 import crimson_twilight.unnamed_magitech_mod.common.UMMContent;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -101,4 +103,12 @@ public class UnnamedMagitechMod
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
         {}
     }
+
+    public static ItemGroup itemGroup = new ItemGroup(MODID)
+    {
+        @Override
+        public ItemStack createIcon() {
+            return null;
+        }
+    };
 }
