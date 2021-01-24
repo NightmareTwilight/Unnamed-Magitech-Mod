@@ -1,7 +1,9 @@
 package crimson_twilight.unnamed_magitech_mod.common;
 
 import crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod;
+import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiPill;
 import net.minecraft.block.Block;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -27,9 +29,11 @@ public class UMMContent
     public static List<Class<? extends TileEntity>> registeredUMMTiles = new ArrayList<>();
     public static List<Fluid> registeredUMMFluids = new ArrayList<>();
 
+    public static ItemKiPill HealthKiPill;
+
     public static void modConstruction()
     {
-
+        HealthKiPill = new ItemKiPill("health_ki_pill", Attributes.MAX_HEALTH, 1);
     }
 
     @SubscribeEvent

@@ -21,7 +21,7 @@ public class UseCountStorage implements IUseCount
 	@Override
 	public int getMaxUseCount(String itemID)
 	{
-		return maxUseMap.getOrDefault(itemID,-1);
+		return maxUseMap.getOrDefault(itemID,5);
 	}
 
 	@Override

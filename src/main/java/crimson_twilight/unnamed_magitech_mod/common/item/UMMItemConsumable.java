@@ -31,7 +31,7 @@ public class UMMItemConsumable extends UMMBaseItem
         count.getUseCount("o");
         count.addUseCount("o");
 
-        if(this.canConsume())
+        if(this.canConsume(worldIn, playerIn, itemstack))
         {
             playerIn.setActiveHand(handIn);
             return ActionResult.resultConsume(itemstack);
@@ -42,11 +42,19 @@ public class UMMItemConsumable extends UMMBaseItem
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entity) {
-        return canConsume() ? consume(stack, world, entity) : stack;
+    public int getUseDuration(ItemStack stack) {
+        return 16;
     }
 
-    public boolean canConsume()
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entity)
+    {
+        if(entity instanceof PlayerEntity)
+            return canConsume(world, (PlayerEntity)entity, stack) ? consume(stack, world, (PlayerEntity)entity) : stack;
+        return stack;
+    }
+
+    public boolean canConsume(World worldIn, PlayerEntity playerIn, ItemStack stack)
     {
         return canConsume;
     }
@@ -61,8 +69,9 @@ public class UMMItemConsumable extends UMMBaseItem
         return isDrink ? UseAction.DRINK : UseAction.EAT;
     }
 
-    public ItemStack consume(ItemStack stack, World world, LivingEntity entity)
+    public ItemStack consume(ItemStack stack, World world, PlayerEntity playerIn)
     {
+        System.out.println("Consumed!");
         stack.setCount(stack.getCount() -1);
         return stack;
     }

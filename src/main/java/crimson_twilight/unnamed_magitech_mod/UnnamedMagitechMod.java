@@ -108,7 +108,7 @@ public class UnnamedMagitechMod
     {
         @Override
         public ItemStack createIcon() {
-            return null;
+            return new ItemStack(UMMContent.HealthKiPill);
         }
     };
 }
