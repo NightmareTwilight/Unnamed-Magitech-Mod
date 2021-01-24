@@ -56,7 +56,14 @@ description='''
     ordering="NONE"
     side="BOTH"
 [[dependencies.unnamed_magitech_mod]]
+    modId="curios"
+    mandatory=false
+    versionRange="[0.3.5,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.unnamed_magitech_mod]]
     modId="eidolon"
     mandatory=false
     versionRange="[0.2.7,)"
-    ordering="NONE"
+    ordering="AFTER"
+    side="BOTH"

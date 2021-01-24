@@ -3,9 +3,11 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
+        maven {url='https://dist.creeper.host/Sponge/maven'}
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -91,29 +93,40 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
-    // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
-    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.16.4-35.1.36'
 
-    // You may put jars on which you depend on in ./libs or you may define them like so..
-    // compile "some.group:artifact:version:classifier"
-    // compile "some.group:artifact:version"
+    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.1.65:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.1.65")
 
-    // Real examples
-    // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.2-4.0.0.1:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.2-4.0.0.1")
 
-    // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+    //compile fg.deobf("curse.maven:eidolon-429625:3157832")
+}
 
-    // These dependencies get remapped to your current MCP mappings
-    // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+repositories {
+    maven {
+        //JEI
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        //Most mods are there
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
 
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    maven {
+        //Curios
+        name = "IllusiveC4's Maven"
+        url = "https://maven.theillusivec4.top/"
+    }
 
+    maven {
+        //Curse maven download thingy, used for Eidolon
+        name = "CurseMaven"
+        url = "https://www.cursemaven.com"
+    }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -121,11 +134,11 @@ jar {
     manifest {
         attributes([
             "Specification-Title": "unnamed_magitech_mod",
-            "Specification-Vendor": "unnamed_magitech_modsareus",
+            "Specification-Vendor": "crimson_twilight",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"unnamed_magitech_modsareus",
+            "Implementation-Vendor" :"crimson_twilight",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
