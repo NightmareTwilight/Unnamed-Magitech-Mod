@@ -27,13 +27,13 @@ public class UseCountStorage implements IUseCount
 	@Override
 	public void setUseCount(String itemID, int count)
 	{
-		useMap.put(itemID,count);
+		useMap.put(itemID, count);
 	}
 
 	@Override
-	public void setmaxUseCount(String itemID, int count)
+	public void setMaxUseCount(String itemID, int count)
 	{
-		maxUseMap.put(itemID,count);
+		maxUseMap.put(itemID, count);
 	}
 
 	@Override
@@ -60,5 +60,11 @@ public class UseCountStorage implements IUseCount
 	{
 		maxUseMap.clear();
 		maxUseMap.putAll(map);
+	}
+
+	@Override
+	public void addUseCount(String itemID)
+	{
+		useMap.put(itemID, useMap.getOrDefault(itemID, 0) + 1);
 	}
 }

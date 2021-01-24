@@ -25,12 +25,6 @@ public class UMMItemConsumable extends UMMBaseItem
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
 
-        //It exists
-        LazyOptional<IUseCount> capability = playerIn.getCapability(CapabilityPlayerUseCount.ITEM_USE_COUNT);
-        IUseCount count = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
-        count.getUseCount("o");
-        count.addUseCount("o");
-
         if(this.canConsume(worldIn, playerIn, itemstack))
         {
             playerIn.setActiveHand(handIn);
@@ -71,7 +65,6 @@ public class UMMItemConsumable extends UMMBaseItem
 
     public ItemStack consume(ItemStack stack, World world, PlayerEntity playerIn)
     {
-        System.out.println("Consumed!");
         stack.setCount(stack.getCount() -1);
         return stack;
     }

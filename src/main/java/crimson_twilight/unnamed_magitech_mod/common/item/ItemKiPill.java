@@ -4,14 +4,10 @@ import crimson_twilight.unnamed_magitech_mod.api.capability.CapabilityPlayerUseC
 import crimson_twilight.unnamed_magitech_mod.api.capability.IUseCount;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
-import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -45,12 +41,10 @@ public class ItemKiPill extends UMMItemConsumable
     @Override
     public ItemStack consume(ItemStack stack, World world, PlayerEntity playerIn)
     {
-        System.out.println("Consume!");
+        playerIn.getAttribute(bonus).applyPersistentModifier(new AttributeModifier(this.itemName, this.bonusAmount, AttributeModifier.Operation.MULTIPLY_TOTAL));
         LazyOptional<IUseCount> capability = playerIn.getCapability(CapabilityPlayerUseCount.ITEM_USE_COUNT);
         IUseCount count = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
-        count.addUseCount(this.itemName);
-        System.out.println(count.getUseCount(this.itemName));
-        new AttributeModifier(this.itemName, this.bonusAmount, AttributeModifier.Operation.ADDITION);
+        count.setUseCount(this.itemName, count.getUseCount(this.itemName) + 1);
         return super.consume(stack, world, playerIn);
     }
     @Override
@@ -61,8 +55,9 @@ public class ItemKiPill extends UMMItemConsumable
         if(worldIn != null)
         {
             PlayerEntity player = (PlayerEntity) Minecraft.getInstance().player.getEntity();
-            LazyOptional<IUseCount> capability = player.getCapability(CapabilityPlayerUseCount.ITEM_USE_COUNT);
-            if (capability.isPresent()) {
+            if(CapabilityPlayerUseCount.ITEM_USE_COUNT!=null)
+            {
+                LazyOptional<IUseCount> capability = player.getCapability(CapabilityPlayerUseCount.ITEM_USE_COUNT);
                 IUseCount count = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
                 tooltip.add(new StringTextComponent(String.valueOf(count.getAllCounts())));
                 tooltip.add(new StringTextComponent( String.valueOf(count.getUseCount(this.itemName) + "/" + count.getMaxUseCount(this.itemName)) ));

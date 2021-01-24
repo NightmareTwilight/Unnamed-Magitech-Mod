@@ -25,8 +25,7 @@ public class EventHandler
     @SubscribeEvent
     public void onCapabilitiesAttachEntity(AttachCapabilitiesEvent<Entity> event)
     {
-        if(event.getObject() instanceof PlayerEntity)
-        event.addCapability(CapabilityPlayerUseCount.RES,new CapabilityPlayerUseCount());
+        if(event.getObject() instanceof PlayerEntity) event.addCapability(CapabilityPlayerUseCount.RES, new CapabilityPlayerUseCount());
     }
 
     @SubscribeEvent

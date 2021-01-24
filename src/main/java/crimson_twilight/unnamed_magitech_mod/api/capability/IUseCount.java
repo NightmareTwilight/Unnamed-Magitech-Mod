@@ -14,7 +14,7 @@ public interface IUseCount
 	int getMaxUseCount(String itemID);
 
 	void setUseCount(String itemID, int count);
-	void setmaxUseCount(String itemID, int count);
+	void setMaxUseCount(String itemID, int count);
 
 	default boolean canUse(String itemID)
 	{
@@ -22,10 +22,7 @@ public interface IUseCount
 		return maxUseCount==-1||(getUseCount(itemID)<maxUseCount);
 	}
 
-	default void addUseCount(String itemID)
-	{
-		setUseCount(itemID, getUseCount(itemID)+1);
-	}
+	void addUseCount(String itemID);
 
 	Map<String, Integer> getAllCounts();
 	Map<String, Integer> getAllMaxCounts();

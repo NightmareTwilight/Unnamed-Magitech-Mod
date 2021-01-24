@@ -33,7 +33,7 @@ public class UMMContent
 
     public static void modConstruction()
     {
-        HealthKiPill = new ItemKiPill("health_ki_pill", Attributes.MAX_HEALTH, 1);
+        HealthKiPill = new ItemKiPill("health_ki_pill", Attributes.MAX_HEALTH, 0.01);
     }
 
     @SubscribeEvent
