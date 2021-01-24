@@ -5,15 +5,17 @@ import crimson_twilight.unnamed_magitech_mod.api.capability.IUseCount;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 
 public class UMMItemConsumable extends UMMBaseItem
 {
-    public boolean canConsume = true;
+    private boolean canConsume = true;
+    private boolean isDrink = false;
+
     public UMMItemConsumable(String name) {
         super(name);
     }
@@ -54,9 +56,20 @@ public class UMMItemConsumable extends UMMBaseItem
         canConsume = b;
     }
 
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return isDrink ? UseAction.DRINK : UseAction.EAT;
+    }
+
     public ItemStack consume(ItemStack stack, World world, LivingEntity entity)
     {
         stack.setCount(stack.getCount() -1);
         return stack;
+    }
+
+    public UMMItemConsumable setDrink()
+    {
+        isDrink = true;
+        return this;
     }
 }
