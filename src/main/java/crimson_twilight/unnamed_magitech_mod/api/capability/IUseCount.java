@@ -23,6 +23,7 @@ public interface IUseCount
 	}
 
 	void addUseCount(String itemID);
+	void addUseCount(String itemID, int amount);
 
 	Map<String, Integer> getAllCounts();
 	Map<String, Integer> getAllMaxCounts();

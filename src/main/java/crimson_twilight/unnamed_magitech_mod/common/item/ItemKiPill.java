@@ -8,6 +8,10 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -28,6 +32,12 @@ public class ItemKiPill extends UMMItemConsumable
         super(name);
         this.bonus = bonus;
         this.bonusAmount = bonusAmount;
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @Override
@@ -59,7 +69,6 @@ public class ItemKiPill extends UMMItemConsumable
             {
                 LazyOptional<IUseCount> capability = player.getCapability(CapabilityPlayerUseCount.ITEM_USE_COUNT);
                 IUseCount count = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
-                tooltip.add(new StringTextComponent(String.valueOf(count.getAllCounts())));
                 tooltip.add(new StringTextComponent( String.valueOf(count.getUseCount(this.itemName) + "/" + count.getMaxUseCount(this.itemName)) ));
             }
         }
