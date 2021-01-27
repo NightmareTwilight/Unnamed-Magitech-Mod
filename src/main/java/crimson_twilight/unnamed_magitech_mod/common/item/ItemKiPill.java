@@ -8,9 +8,7 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -19,19 +17,27 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.LazyOptional;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemKiPill extends UMMItemConsumable
-{
+public class ItemKiPill extends UMMItemConsumable {
     private Attribute bonus;
     private double bonusAmount;
+    public int startingMaxUse;
 
     public ItemKiPill(String name, Attribute bonus, double bonusAmount)
     {
         super(name);
         this.bonus = bonus;
         this.bonusAmount = bonusAmount;
+        this.startingMaxUse = 5;
+    }
+
+    public ItemKiPill(String name, Attribute bonus, double bonusAmount, int startingMaxUse)
+    {
+        super(name);
+        this.bonus = bonus;
+        this.bonusAmount = bonusAmount;
+        this.startingMaxUse = startingMaxUse;
     }
 
     @Override

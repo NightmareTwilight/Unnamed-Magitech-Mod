@@ -25,6 +25,8 @@ public interface IUseCount
 	void addUseCount(String itemID);
 	void addUseCount(String itemID, int amount);
 
+	boolean hasRegisteredUseCount(String itemID);
+
 	Map<String, Integer> getAllCounts();
 	Map<String, Integer> getAllMaxCounts();
 	void setAllCounts(Map<String, Integer> map);

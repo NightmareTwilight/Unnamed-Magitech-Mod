@@ -69,4 +69,9 @@ public class PlayerUseCount implements IUseCount
     {
         useMap.put(itemID, useMap.getOrDefault(itemID, 0) + amount);
     }
+
+	@Override
+	public boolean hasRegisteredUseCount(String itemID) {
+		return maxUseMap.containsKey(itemID);
+	}
 }
