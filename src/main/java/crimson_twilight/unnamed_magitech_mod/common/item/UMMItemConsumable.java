@@ -1,7 +1,5 @@
 package crimson_twilight.unnamed_magitech_mod.common.item;
 
-import crimson_twilight.unnamed_magitech_mod.api.capability.CapabilityPlayerUseCount;
-import crimson_twilight.unnamed_magitech_mod.api.capability.IUseCount;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -9,7 +7,6 @@ import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.LazyOptional;
 
 public class UMMItemConsumable extends UMMBaseItem
 {

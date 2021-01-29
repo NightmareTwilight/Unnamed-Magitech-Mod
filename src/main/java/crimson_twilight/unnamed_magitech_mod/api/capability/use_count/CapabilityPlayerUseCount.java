@@ -1,20 +1,17 @@
-package crimson_twilight.unnamed_magitech_mod.api.capability;
+package crimson_twilight.unnamed_magitech_mod.api.capability.use_count;
 
 import crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod;
+import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.IUseCount;
+import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.PlayerUseCount;
+import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.UseCountStorage;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.IntNBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.*;
-import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * @author Pabilo8

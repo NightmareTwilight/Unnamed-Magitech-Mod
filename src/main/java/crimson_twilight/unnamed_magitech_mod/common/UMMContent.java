@@ -2,6 +2,7 @@ package crimson_twilight.unnamed_magitech_mod.common;
 
 import crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod;
 import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiPill;
+import crimson_twilight.unnamed_magitech_mod.common.item.ItemSpiritVeinPill;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.fluid.Fluid;
@@ -30,10 +31,16 @@ public class UMMContent
     public static List<Fluid> registeredUMMFluids = new ArrayList<>();
 
     public static ItemKiPill HealthKiPill;
+    public static ItemSpiritVeinPill SpiritGrowerPill;
+    public static ItemSpiritVeinPill MaxKiBoosterPill1;
+    public static ItemSpiritVeinPill MaxKiBoosterPill2;
 
     public static void modConstruction()
     {
         HealthKiPill = new ItemKiPill("health_ki_pill", Attributes.MAX_HEALTH, 0.01);
+        SpiritGrowerPill = new ItemSpiritVeinPill("spirit_grower_pill", 100, 1, true);
+        MaxKiBoosterPill1 = new ItemSpiritVeinPill("max_ki_boost_pill_1", 100, 99);
+        MaxKiBoosterPill2 = new ItemSpiritVeinPill("max_ki_boost_pill_2", 1000, 99);
     }
 
     @SubscribeEvent

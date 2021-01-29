@@ -1,4 +1,4 @@
-package crimson_twilight.unnamed_magitech_mod.api.capability;
+package crimson_twilight.unnamed_magitech_mod.api.capability.use_count;
 
 import net.minecraft.entity.player.PlayerEntity;
 

@@ -1,7 +1,7 @@
 package crimson_twilight.unnamed_magitech_mod.common.item;
 
-import crimson_twilight.unnamed_magitech_mod.api.capability.CapabilityPlayerUseCount;
-import crimson_twilight.unnamed_magitech_mod.api.capability.IUseCount;
+import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.CapabilityPlayerUseCount;
+import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.IUseCount;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -17,14 +17,17 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.LazyOptional;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemKiPill extends UMMItemConsumable {
+public class ItemKiPill extends UMMItemConsumable
+{
+    @Nullable
     private Attribute bonus;
     private double bonusAmount;
     public int startingMaxUse;
 
-    public ItemKiPill(String name, Attribute bonus, double bonusAmount)
+    public ItemKiPill(String name, @Nullable Attribute bonus, double bonusAmount)
     {
         super(name);
         this.bonus = bonus;
@@ -32,7 +35,7 @@ public class ItemKiPill extends UMMItemConsumable {
         this.startingMaxUse = 5;
     }
 
-    public ItemKiPill(String name, Attribute bonus, double bonusAmount, int startingMaxUse)
+    public ItemKiPill(String name, @Nullable Attribute bonus, double bonusAmount, int startingMaxUse)
     {
         super(name);
         this.bonus = bonus;
@@ -57,7 +60,7 @@ public class ItemKiPill extends UMMItemConsumable {
     @Override
     public ItemStack consume(ItemStack stack, World world, PlayerEntity playerIn)
     {
-        playerIn.getAttribute(bonus).applyPersistentModifier(new AttributeModifier(this.itemName, this.bonusAmount, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        if(bonus != null) playerIn.getAttribute(bonus).applyPersistentModifier(new AttributeModifier(this.itemName, this.bonusAmount, AttributeModifier.Operation.MULTIPLY_TOTAL));
         LazyOptional<IUseCount> capability = playerIn.getCapability(CapabilityPlayerUseCount.ITEM_USE_COUNT);
         IUseCount count = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
         count.setUseCount(this.itemName, count.getUseCount(this.itemName) + 1);

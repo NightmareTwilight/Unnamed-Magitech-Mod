@@ -1,4 +1,4 @@
-package crimson_twilight.unnamed_magitech_mod.api.capability;
+package crimson_twilight.unnamed_magitech_mod.api.capability.use_count;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -6,7 +6,6 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
-import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

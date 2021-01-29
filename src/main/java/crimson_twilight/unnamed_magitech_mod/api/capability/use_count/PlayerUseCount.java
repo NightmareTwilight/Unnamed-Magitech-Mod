@@ -1,4 +1,4 @@
-package crimson_twilight.unnamed_magitech_mod.api.capability;
+package crimson_twilight.unnamed_magitech_mod.api.capability.use_count;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class PlayerUseCount implements IUseCount
 	@Override
 	public int getMaxUseCount(String itemID)
 	{
-		return maxUseMap.getOrDefault(itemID,5);
+		return maxUseMap.getOrDefault(itemID,-1);
 	}
 
 	@Override
