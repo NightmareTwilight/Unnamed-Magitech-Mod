@@ -54,6 +54,8 @@ public class UnnamedMagitechMod
         proxy.modConstruction();
     }
 
+    public static int max_ascention_level = 3;
+
     private void setup(final FMLCommonSetupEvent event)
     {
         proxy.preInit();

@@ -4,7 +4,7 @@ public class PlayerKi implements IPlayerKi
 {
     int amount = 0;
     int max = 0;
-    int gen = 1;
+    int gen = 10;
     boolean hasVeins;
 
     @Override
