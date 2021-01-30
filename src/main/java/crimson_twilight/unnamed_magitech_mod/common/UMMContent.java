@@ -43,8 +43,8 @@ public class UMMContent
         HealthKiPill = new ItemKiPill("health_ki_pill", Attributes.MAX_HEALTH, 0.01);
         SpiritGrowerPill = new ItemSpiritVeinPill("spirit_grower_pill", 100, 1, true);
         for (int i = 0; i < UnnamedMagitechMod.max_ascention_level; i++) {
-            MaxKiBoosterPill = new ItemSpiritVeinPill("max_ki_boost_pill_"+i+1, (int)(Math.pow(10, i+2)), 99);
-            KiGenPill = new ItemKiGatheringPill("ki_gathering_pill_"+i+1, (int)(Math.pow(10, i+1)), 9);
+            MaxKiBoosterPill = new ItemSpiritVeinPill("max_ki_boost_pill_"+(i+1), (int)(Math.pow(10, i+2)), 99);
+            KiGenPill = new ItemKiGatheringPill("ki_gathering_pill_"+(i+1), (int)(Math.pow(10, i+1)), 9);
         }
         CleansingPill = new ItemBodyCleansingPill("cleansing_pill_1", 250);
     }
