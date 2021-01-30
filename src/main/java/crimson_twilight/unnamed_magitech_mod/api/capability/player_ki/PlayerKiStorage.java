@@ -14,6 +14,7 @@ public class PlayerKiStorage implements Capability.IStorage<IPlayerKi>
         nbt.putInt("max", instance.getMaxKiAmount());
         nbt.putInt("gen", instance.getKiGenAmount());
         nbt.putBoolean("hasVeins", instance.hasVeins());
+        nbt.putInt("corrupt", instance.getCorruption());
         return nbt;
     }
 
@@ -31,6 +32,8 @@ public class PlayerKiStorage implements Capability.IStorage<IPlayerKi>
             if(genTag instanceof IntNBT) instance.setKiGenAmount(((IntNBT)genTag).getInt());
             INBT veinsTag = tag.get("hasVeins");
             if(veinsTag instanceof ByteNBT) instance.setHasVeins(((ByteNBT)veinsTag).getByte() != 0);
+            INBT corruptTag = tag.get("corrupt");
+            if(corruptTag instanceof IntNBT) instance.setCorruption(((IntNBT)corruptTag).getInt());
         }
     }
 }

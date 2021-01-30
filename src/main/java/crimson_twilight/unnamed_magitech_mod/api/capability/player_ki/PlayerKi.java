@@ -6,6 +6,7 @@ public class PlayerKi implements IPlayerKi
     int max = 0;
     int gen = 10;
     boolean hasVeins;
+    int corruption = 0;
 
     @Override
     public int getKiAmount() {
@@ -24,20 +25,26 @@ public class PlayerKi implements IPlayerKi
     public boolean hasVeins() { return hasVeins; }
 
     @Override
-    public void setKiAmount(int amount) { this.amount = Math.min(amount, this.max); }
+    public int getCorruption() { return corruption; }
+
+    @Override
+    public void setKiAmount(int amount) { this.amount = Math.max(0, Math.min(amount, this.max)); }
 
     @Override
     public void setKiGenAmount(int amount) {
-        this.gen = amount;
+        this.gen = Math.max(1, amount);
     }
 
     @Override
     public void setMaxKiAmount(int amount) {
-        this.max = amount;
+        this.max = Math.max(0, amount);
     }
 
     @Override
     public void setHasVeins(boolean hasVeins) { this.hasVeins = hasVeins; }
+
+    @Override
+    public void setCorruption(int amount) { this.corruption = Math.max(0, amount); }
 
     @Override
     public void addKiAmount(int amount) {
@@ -53,4 +60,7 @@ public class PlayerKi implements IPlayerKi
     public void addKiGenAmount(int amount) {
         setKiGenAmount(this.gen + amount);
     }
+
+    @Override
+    public void addCorruption(int amount) { setCorruption(this.corruption + amount); }
 }

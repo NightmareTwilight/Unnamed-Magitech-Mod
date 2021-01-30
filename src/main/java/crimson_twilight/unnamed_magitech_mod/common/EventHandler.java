@@ -9,6 +9,7 @@ import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiPill;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -16,6 +17,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.WorldTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -79,7 +81,20 @@ public class EventHandler
         {
             LazyOptional<IPlayerKi> capability = event.player.getCapability(CapabilityPlayerKi.PLAYER_KI_CAPABILITY);
             IPlayerKi ki = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
-            ki.addKiAmount(ki.getKiGenAmount());
+            ki.addKiAmount(Math.max((int)((double)ki.getKiGenAmount()/Math.log10(ki.getCorruption() + 1)), 1));
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityUse(LivingEntityUseItemEvent.Finish event)
+    {
+        if(event.getItem().isFood() && event.getEntityLiving() instanceof PlayerEntity)
+        {
+            ItemStack stack = event.getItem();
+            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+            LazyOptional<IPlayerKi> capability = player.getCapability(CapabilityPlayerKi.PLAYER_KI_CAPABILITY);
+            IPlayerKi ki = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
+            ki.addCorruption(stack.getItem().getFood().getHealing() * 100);
         }
     }
 
