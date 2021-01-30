@@ -1,6 +1,7 @@
 package crimson_twilight.unnamed_magitech_mod.common;
 
 import crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod;
+import crimson_twilight.unnamed_magitech_mod.common.item.ItemBodyCleansingPill;
 import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiGatheringPill;
 import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiPill;
 import crimson_twilight.unnamed_magitech_mod.common.item.ItemSpiritVeinPill;
@@ -35,6 +36,7 @@ public class UMMContent
     public static ItemSpiritVeinPill SpiritGrowerPill;
     public static ItemSpiritVeinPill MaxKiBoosterPill;
     public static ItemKiGatheringPill KiGenPill;
+    public static ItemBodyCleansingPill CleansingPill;
 
     public static void modConstruction()
     {
@@ -44,6 +46,7 @@ public class UMMContent
             MaxKiBoosterPill = new ItemSpiritVeinPill("max_ki_boost_pill_"+i+1, (int)(Math.pow(10, i+2)), 99);
             KiGenPill = new ItemKiGatheringPill("ki_gathering_pill_"+i+1, (int)(Math.pow(10, i+1)), 9);
         }
+        CleansingPill = new ItemBodyCleansingPill("cleansing_pill_1", 250);
     }
 
     @SubscribeEvent
