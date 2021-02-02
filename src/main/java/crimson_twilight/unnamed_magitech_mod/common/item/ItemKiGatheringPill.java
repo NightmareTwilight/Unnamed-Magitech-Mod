@@ -2,13 +2,10 @@ package crimson_twilight.unnamed_magitech_mod.common.item;
 
 import crimson_twilight.unnamed_magitech_mod.api.capability.player_ki.CapabilityPlayerKi;
 import crimson_twilight.unnamed_magitech_mod.api.capability.player_ki.IPlayerKi;
-import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
-
-import javax.annotation.Nullable;
 
 public class ItemKiGatheringPill extends ItemKiPill
 {

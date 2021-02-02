@@ -1,5 +1,7 @@
 package crimson_twilight.unnamed_magitech_mod.common.item;
 
+import crimson_twilight.unnamed_magitech_mod.api.capability.cultivation.CapabilityCultivation;
+import crimson_twilight.unnamed_magitech_mod.api.capability.cultivation.ICultivation;
 import crimson_twilight.unnamed_magitech_mod.api.capability.player_ki.CapabilityPlayerKi;
 import crimson_twilight.unnamed_magitech_mod.api.capability.player_ki.IPlayerKi;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,9 +37,14 @@ public class ItemSpiritVeinPill extends ItemKiPill
     @Override
     public ItemStack consume(ItemStack stack, World world, PlayerEntity playerIn)
     {
-        LazyOptional<IPlayerKi> capability = playerIn.getCapability(CapabilityPlayerKi.PLAYER_KI_CAPABILITY);
-        IPlayerKi ki = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
-        if (this.canGrow) ki.setHasVeins(true);
+        LazyOptional<IPlayerKi> capabilityKi = playerIn.getCapability(CapabilityPlayerKi.PLAYER_KI_CAPABILITY);
+        IPlayerKi ki = capabilityKi.orElseThrow(() -> new IllegalArgumentException("at login"));
+        if (this.canGrow) {
+            ki.setHasVeins(true);
+            LazyOptional<ICultivation> capabilityCulti = playerIn.getCapability(CapabilityCultivation.CULTIVATION_CAPABILITY);
+            ICultivation Culti = capabilityCulti.orElseThrow(() -> new IllegalArgumentException("at login"));
+            if(Culti.getAscensionLevel() == 0 && Culti.getCultivationRank() == 0) Culti.addCultivationRank(1);
+        }
         if (ki.hasVeins()) ki.addMaxKiAmount(this.bonus);
         return super.consume(stack, world, playerIn);
     }

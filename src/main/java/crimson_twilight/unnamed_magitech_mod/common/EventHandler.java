@@ -1,16 +1,21 @@
 package crimson_twilight.unnamed_magitech_mod.common;
 
 import crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod;
+import crimson_twilight.unnamed_magitech_mod.api.capability.cultivation.CapabilityCultivation;
+import crimson_twilight.unnamed_magitech_mod.api.capability.cultivation.ICultivation;
 import crimson_twilight.unnamed_magitech_mod.api.capability.player_ki.CapabilityPlayerKi;
 import crimson_twilight.unnamed_magitech_mod.api.capability.player_ki.IPlayerKi;
 import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.CapabilityPlayerUseCount;
 import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.IUseCount;
+import crimson_twilight.unnamed_magitech_mod.client.UMMKeyBinds;
 import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiPill;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
@@ -37,6 +42,7 @@ public class EventHandler
         {
             event.addCapability(CapabilityPlayerUseCount.RES, new CapabilityPlayerUseCount());
             event.addCapability(CapabilityPlayerKi.RES, new CapabilityPlayerKi());
+            event.addCapability(CapabilityCultivation.RES, new CapabilityCultivation());
         }
     }
 
@@ -77,11 +83,21 @@ public class EventHandler
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
-        if(event.player.world.getGameTime()%1200==0)
+        LazyOptional<IPlayerKi> capabilityKi = event.player.getCapability(CapabilityPlayerKi.PLAYER_KI_CAPABILITY);
+        IPlayerKi ki = capabilityKi.orElseThrow(() -> new IllegalArgumentException("at login"));
+        if(event.player.ticksExisted % 1200==1199)
         {
-            LazyOptional<IPlayerKi> capability = event.player.getCapability(CapabilityPlayerKi.PLAYER_KI_CAPABILITY);
-            IPlayerKi ki = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
             ki.addKiAmount(Math.max((int)((double)ki.getKiGenAmount()/Math.log10(ki.getCorruption() + 1)), 1));
+        }
+    }
+
+    @SubscribeEvent
+    public void onKeyPress(InputEvent.KeyInputEvent event)
+    {
+        if(UMMKeyBinds.cultivate.isPressed())
+        {
+            PlayerEntity player = (PlayerEntity)Minecraft.getInstance().player;
+            //TODO send packet to server
         }
     }
 

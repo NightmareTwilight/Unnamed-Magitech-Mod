@@ -1,13 +1,13 @@
 package crimson_twilight.unnamed_magitech_mod.api.capability.use_count;
 
 import crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod;
-import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.IUseCount;
-import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.PlayerUseCount;
-import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.UseCountStorage;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.capabilities.*;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;

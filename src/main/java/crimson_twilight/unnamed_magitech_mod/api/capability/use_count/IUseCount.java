@@ -1,7 +1,5 @@
 package crimson_twilight.unnamed_magitech_mod.api.capability.use_count;
 
-import net.minecraft.entity.player.PlayerEntity;
-
 import java.util.Map;
 
 /**

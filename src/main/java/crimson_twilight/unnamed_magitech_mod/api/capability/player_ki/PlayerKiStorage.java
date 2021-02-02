@@ -1,6 +1,9 @@
 package crimson_twilight.unnamed_magitech_mod.api.capability.player_ki;
 
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.ByteNBT;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.IntNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 

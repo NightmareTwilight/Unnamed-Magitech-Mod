@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod.MODID;
 import static crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod.LOGGER;
+import static crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Bus.MOD)
 public class UMMContent
