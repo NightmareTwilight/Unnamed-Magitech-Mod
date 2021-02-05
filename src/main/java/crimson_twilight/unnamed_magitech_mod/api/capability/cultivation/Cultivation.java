@@ -3,7 +3,7 @@ package crimson_twilight.unnamed_magitech_mod.api.capability.cultivation;
 public class Cultivation implements ICultivation
 {
     int cb = 0;
-    int ratio = 100;
+    int ratio = 10000;
     int gain = 1;
     int lvl = 0;
     int rank = 0;
@@ -11,6 +11,7 @@ public class Cultivation implements ICultivation
     int core = 0;
     int soul = 0;
     long time;
+    boolean isCutivating;
 
     @Override
     public int getCultivationBase() {
@@ -56,6 +57,13 @@ public class Cultivation implements ICultivation
     public long getStartTime() {
         return time;
     }
+
+    @Override
+    public boolean isCultivating() {
+        return isCutivating;
+    }
+
+
 
     @Override
     public void setCultivationBase(int amount) {
@@ -106,7 +114,8 @@ public class Cultivation implements ICultivation
         this.time = time;
     }
 
-
+    @Override
+    public void setIsCultivating(boolean state) { this.isCutivating = state; }
 
     @Override
     public void addCultivationBase(int amount) {

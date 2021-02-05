@@ -11,6 +11,8 @@ public interface ICultivation
     int getCoreAmount();
     int getSoulAmount();
     long getStartTime();
+    boolean isCultivating();
+
 
     void setCultivationBase(int amount);
     void setKiToCB(int amount);
@@ -21,6 +23,7 @@ public interface ICultivation
     void setCoreAmount(int amount);
     void setSoulAmount(int amount);
     void setStartTime(long amount);
+    void setIsCultivating(boolean state);
 
     void addCultivationBase(int amount);
     void addKiToCB(int amount);

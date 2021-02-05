@@ -4,6 +4,7 @@ import crimson_twilight.unnamed_magitech_mod.client.ClientProxy;
 import crimson_twilight.unnamed_magitech_mod.common.CommonProxy;
 import crimson_twilight.unnamed_magitech_mod.common.EventHandler;
 import crimson_twilight.unnamed_magitech_mod.common.UMMContent;
+import crimson_twilight.unnamed_magitech_mod.common.network.UMMDataPacketHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -60,6 +61,7 @@ public class UnnamedMagitechMod
         UMMContent.init();
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         proxy.init();
+        UMMDataPacketHandler.init();
 
         proxy.initEnd();
         UMMContent.postInit();

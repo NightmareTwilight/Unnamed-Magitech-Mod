@@ -8,7 +8,10 @@ import crimson_twilight.unnamed_magitech_mod.api.capability.player_ki.IPlayerKi;
 import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.CapabilityPlayerUseCount;
 import crimson_twilight.unnamed_magitech_mod.api.capability.use_count.IUseCount;
 import crimson_twilight.unnamed_magitech_mod.client.UMMKeyBinds;
+import crimson_twilight.unnamed_magitech_mod.common.events.EventCultivation;
 import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiPill;
+import crimson_twilight.unnamed_magitech_mod.common.network.CultivatePacket;
+import crimson_twilight.unnamed_magitech_mod.common.network.UMMDataPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,6 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
@@ -89,6 +93,19 @@ public class EventHandler
         {
             ki.addKiAmount(Math.max((int)((double)ki.getKiGenAmount()/Math.log10(ki.getCorruption() + 1)), 1));
         }
+        LazyOptional<ICultivation> capCulti = event.player.getCapability(CapabilityCultivation.CULTIVATION_CAPABILITY);
+        ICultivation culti = capCulti.orElseThrow(() -> new IllegalArgumentException("at login"));
+        if(culti.isCultivating() && !UMMKeyBinds.cultivate.isKeyDown())
+        {
+            culti.setIsCultivating(false);
+            EventCultivation.EventEndCultivation e = new EventCultivation.EventEndCultivation(event.player);
+            MinecraftForge.EVENT_BUS.post(e);
+        }
+        if(culti.isCultivating() && UMMKeyBinds.cultivate.isKeyDown())
+        {
+            EventCultivation e = new EventCultivation(event.player);
+            MinecraftForge.EVENT_BUS.post(e);
+        }
     }
 
     @SubscribeEvent
@@ -97,7 +114,7 @@ public class EventHandler
         if(UMMKeyBinds.cultivate.isPressed())
         {
             PlayerEntity player = (PlayerEntity)Minecraft.getInstance().player;
-            //TODO send packet to server
+            UMMDataPacketHandler.INSTANCE.sendToServer(new CultivatePacket(player.getUniqueID()));
         }
     }
 
