@@ -22,7 +22,7 @@ public class CapabilityPlayerUseCount implements ICapabilitySerializable<Compoun
 	@CapabilityInject(IUseCount.class)
 	public static final Capability<IUseCount> ITEM_USE_COUNT = null;
 	public static final ResourceLocation RES = new ResourceLocation(UnnamedMagitechMod.MODID,"cap_use_count");
-	private LazyOptional<IUseCount> instance = LazyOptional.of(ITEM_USE_COUNT::getDefaultInstance);
+	LazyOptional<IUseCount> instance = LazyOptional.of(ITEM_USE_COUNT::getDefaultInstance);
 
 	public static void register()
 	{

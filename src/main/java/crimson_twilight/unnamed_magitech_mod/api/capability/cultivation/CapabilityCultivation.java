@@ -18,7 +18,7 @@ public class CapabilityCultivation implements ICapabilitySerializable<CompoundNB
     @CapabilityInject(ICultivation.class)
     public static final Capability<ICultivation> CULTIVATION_CAPABILITY = null;
     public static final ResourceLocation RES = new ResourceLocation(UnnamedMagitechMod.MODID, "cultivation");
-    private LazyOptional<ICultivation> instance = LazyOptional.of(CULTIVATION_CAPABILITY::getDefaultInstance);
+    LazyOptional<ICultivation> instance = LazyOptional.of(CULTIVATION_CAPABILITY::getDefaultInstance);
 
     public static void register()
     {
