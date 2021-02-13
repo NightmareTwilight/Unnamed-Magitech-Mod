@@ -1,6 +1,7 @@
 package crimson_twilight.unnamed_magitech_mod;
 
 import crimson_twilight.unnamed_magitech_mod.client.ClientProxy;
+import crimson_twilight.unnamed_magitech_mod.client.UMMKeyBinds;
 import crimson_twilight.unnamed_magitech_mod.common.CommonProxy;
 import crimson_twilight.unnamed_magitech_mod.common.EventHandler;
 import crimson_twilight.unnamed_magitech_mod.common.UMMContent;
@@ -68,11 +69,6 @@ public class UnnamedMagitechMod
         proxy.postInit();
 
         proxy.postInitEnd();
-    }
-
-    private void doClientStuff(final FMLClientSetupEvent event)
-    {
-        LOGGER.info("Client starting");
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

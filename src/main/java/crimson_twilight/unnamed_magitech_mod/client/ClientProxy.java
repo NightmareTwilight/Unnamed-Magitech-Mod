@@ -2,8 +2,10 @@ package crimson_twilight.unnamed_magitech_mod.client;
 
 import crimson_twilight.unnamed_magitech_mod.common.CommonProxy;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import static crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod.MODID;
 
@@ -62,5 +64,11 @@ public class ClientProxy extends CommonProxy
     public void onWorldLoad()
     {
         super.onWorldLoad();
+    }
+
+    @SubscribeEvent
+    public static void doClientStuff(FMLClientSetupEvent event)
+    {
+        UMMKeyBinds.register();
     }
 }

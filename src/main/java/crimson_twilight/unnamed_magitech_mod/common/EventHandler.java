@@ -109,11 +109,15 @@ public class EventHandler
     }
 
     @SubscribeEvent
-    public void onKeyPress(InputEvent.KeyInputEvent event)
+    public void onKeyPress(TickEvent.ClientTickEvent event)
     {
-        if(UMMKeyBinds.cultivate.isPressed())
+        if (event.phase != TickEvent.Phase.END) {
+            return;
+        }
+        Minecraft mc = Minecraft.getInstance();
+        if(UMMKeyBinds.cultivate.isPressed() && mc.isGameFocused())
         {
-            PlayerEntity player = (PlayerEntity)Minecraft.getInstance().player;
+            PlayerEntity player = (PlayerEntity)mc.player;
             UMMDataPacketHandler.INSTANCE.sendToServer(new CultivatePacket(player.getUniqueID()));
         }
     }
