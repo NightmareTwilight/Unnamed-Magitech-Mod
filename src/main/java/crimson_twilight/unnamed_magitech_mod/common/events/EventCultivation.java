@@ -12,13 +12,14 @@ import net.minecraftforge.eventbus.api.Cancelable;
 public class EventCultivation extends PlayerEvent
 {
     protected final ICultivation cultivation;
+    protected final IPlayerKi ki;
     public EventCultivation(PlayerEntity player)
     {
         super(player);
         LazyOptional<ICultivation> capCu = player.getCapability(CapabilityCultivation.CULTIVATION_CAPABILITY);
         LazyOptional<IPlayerKi> capKI = player.getCapability(CapabilityPlayerKi.PLAYER_KI_CAPABILITY);
-        IPlayerKi ki = capKI.orElseThrow(() -> new IllegalArgumentException("at login"));
         this.cultivation = capCu.orElseThrow(() -> new IllegalArgumentException("at login"));
+        this.ki = capKI.orElseThrow(() -> new IllegalArgumentException("at login"));
         if(cultivation.getStartTime() != 0 && (player.world.getGameTime() - cultivation.getStartTime()) % 2400==2399 && ki.getKiAmount() >= cultivation.getKiToCB())
         {
             ki.addKiAmount(-cultivation.getKiToCB());
