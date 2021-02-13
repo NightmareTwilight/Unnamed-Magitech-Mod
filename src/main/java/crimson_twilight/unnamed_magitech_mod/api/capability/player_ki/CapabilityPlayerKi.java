@@ -18,7 +18,7 @@ public class CapabilityPlayerKi implements ICapabilitySerializable<CompoundNBT>
     @CapabilityInject(IPlayerKi.class)
     public static final Capability<IPlayerKi> PLAYER_KI_CAPABILITY = null;
     public static final ResourceLocation RES = new ResourceLocation(UnnamedMagitechMod.MODID, "player_ki");
-    LazyOptional<IPlayerKi> instance = LazyOptional.of(PLAYER_KI_CAPABILITY::getDefaultInstance);
+    private LazyOptional<IPlayerKi> instance = LazyOptional.of(PLAYER_KI_CAPABILITY::getDefaultInstance);
 
     public static void register()
     {

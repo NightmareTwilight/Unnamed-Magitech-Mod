@@ -1,8 +1,6 @@
 package crimson_twilight.unnamed_magitech_mod.api.capability.cultivation;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.IntNBT;
+import net.minecraft.nbt.*;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -20,6 +18,8 @@ public class CultivationStorage implements Capability.IStorage<ICultivation>
         nbt.putInt("foundation", instance.getFoundationAmount());
         nbt.putInt("core", instance.getCoreAmount());
         nbt.putInt("soul", instance.getSoulAmount());
+        nbt.putLong("time", instance.getStartTime());
+        nbt.putBoolean("cultivating", instance.isCultivating());
         return nbt;
     }
 
@@ -45,6 +45,10 @@ public class CultivationStorage implements Capability.IStorage<ICultivation>
             if(coreTag instanceof IntNBT) instance.setCoreAmount(((IntNBT)coreTag).getInt());
             INBT soulTag = tag.get("soul");
             if(soulTag instanceof IntNBT) instance.setSoulAmount(((IntNBT)soulTag).getInt());
+            INBT tagTag = tag.get("time");
+            if(tagTag instanceof LongNBT) instance.setStartTime(((LongNBT)tagTag).getLong());
+            INBT cultivatingTag = tag.get("cultivating");
+            if(cultivatingTag instanceof ByteNBT) instance.setIsCultivating(((ByteNBT)cultivatingTag).getByte() != 0);
         }
     }
 }
