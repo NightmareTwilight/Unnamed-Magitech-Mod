@@ -25,10 +25,7 @@ public class CommonProxy
 
     public void init()
     {
-        if(Mods.EIDOLON.isPresent())
-        {
-            UMMDeities.register();
-        }
+
     }
 
     public void initEnd()

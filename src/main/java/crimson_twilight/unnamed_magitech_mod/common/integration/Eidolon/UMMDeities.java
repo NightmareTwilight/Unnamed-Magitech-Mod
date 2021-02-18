@@ -7,9 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class UMMDeities extends Deities
 {
-    public static void register()
-    {
-        final Deity CULTIVATOR_DEITY = register(new CultivatorDeity(new ResourceLocation(UnnamedMagitechMod.MODID, "cultivator"), 15, 200, 130));
-    }
+    public static final Deity
+                CULTIVATOR_DEITY = register(new CultivatorDeity(new ResourceLocation(UnnamedMagitechMod.MODID, "cultivator"), 15, 200, 130));
 
 }

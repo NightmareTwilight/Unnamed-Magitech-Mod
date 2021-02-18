@@ -14,13 +14,13 @@ public class CultivatorDeity extends Deity
     }
 
     @Override
-    public void onReputationUnlock(PlayerEntity playerEntity, IReputation iReputation, ResourceLocation resourceLocation)
+    public void onReputationUnlock(PlayerEntity playerEntity, IReputation rep, ResourceLocation resourceLocation)
     {
 
     }
 
     @Override
-    public void onReputationChange(PlayerEntity playerEntity, IReputation iReputation, double v, double v1)
+    public void onReputationChange(PlayerEntity playerEntity, IReputation rep, double v, double v1)
     {
 
     }
