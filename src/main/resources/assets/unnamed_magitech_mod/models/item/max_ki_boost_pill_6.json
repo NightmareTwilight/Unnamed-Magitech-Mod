@@ -1,0 +1,7 @@
+{
+	"parent":  "item/generated",
+	"textures": {
+		"layer0": "unnamed_magitech_mod:item/max_ki_boost_pill",
+		"layer1": "unnamed_magitech_mod:item/pill_mk6"
+	}
+}

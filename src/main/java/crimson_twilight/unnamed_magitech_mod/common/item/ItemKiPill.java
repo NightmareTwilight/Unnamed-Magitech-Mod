@@ -78,8 +78,7 @@ public class ItemKiPill extends UMMItemConsumable
             {
                 LazyOptional<IUseCount> capability = player.getCapability(CapabilityPlayerUseCount.ITEM_USE_COUNT);
                 IUseCount count = capability.orElseThrow(() -> new IllegalArgumentException("at login"));
-                if(count.getMaxUseCount(this.itemName) < 0) { tooltip.add(new StringTextComponent( String.valueOf(count.getUseCount(this.itemName) ))); }
-                else { tooltip.add(new StringTextComponent( String.valueOf(count.getUseCount(this.itemName) + "/" + count.getMaxUseCount(this.itemName)) )); }
+                if(count.getMaxUseCount(this.itemName) > 0) { tooltip.add(new StringTextComponent( String.valueOf(count.getUseCount(this.itemName) + "/" + count.getMaxUseCount(this.itemName)) )); }
             }
         }
     }

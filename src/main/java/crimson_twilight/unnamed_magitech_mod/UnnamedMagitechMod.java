@@ -52,7 +52,7 @@ public class UnnamedMagitechMod
         proxy.modConstruction();
     }
 
-    public static int max_ascention_level = 3;
+    public static int max_pill_level = 9;
 
     private void setup(final FMLCommonSetupEvent event)
     {

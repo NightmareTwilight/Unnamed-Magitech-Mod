@@ -11,7 +11,7 @@ public class UMMSpells extends Spells
 {
     public static Spell
             CULTIVATION_PRAYER = register(new PrayerSpell(
-                    new ResourceLocation(UnnamedMagitechMod.MODID, "cultivate_prayer"),
+            new ResourceLocation(UnnamedMagitechMod.MODID, "cultivate_prayer"),
             UMMDeities.CULTIVATOR_DEITY,
             Signs.BLOOD_SIGN, Signs.SOUL_SIGN, Signs.SOUL_SIGN
             ));
