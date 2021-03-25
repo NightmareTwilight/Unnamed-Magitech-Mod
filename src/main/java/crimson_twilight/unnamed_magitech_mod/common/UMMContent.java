@@ -1,10 +1,7 @@
 package crimson_twilight.unnamed_magitech_mod.common;
 
 import crimson_twilight.unnamed_magitech_mod.UnnamedMagitechMod;
-import crimson_twilight.unnamed_magitech_mod.common.item.ItemBodyCleansingPill;
-import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiGatheringPill;
-import crimson_twilight.unnamed_magitech_mod.common.item.ItemKiPill;
-import crimson_twilight.unnamed_magitech_mod.common.item.ItemSpiritVeinPill;
+import crimson_twilight.unnamed_magitech_mod.common.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.fluid.Fluid;
@@ -32,6 +29,9 @@ public class UMMContent
     public static List<Class<? extends TileEntity>> registeredUMMTiles = new ArrayList<>();
     public static List<Fluid> registeredUMMFluids = new ArrayList<>();
 
+    public static ItemCrystalWarHammer CrystalWarHammer;
+
+    //Eidolon Stuff
     public static ItemKiPill HealthKiPill;
     public static ItemSpiritVeinPill SpiritGrowerPill;
     public static ItemSpiritVeinPill MaxKiBoosterPill;
@@ -40,6 +40,9 @@ public class UMMContent
 
     public static void modConstruction()
     {
+        CrystalWarHammer = new ItemCrystalWarHammer(new Item.Properties().defaultMaxDamage(255).maxStackSize(1), "crystal_war_hammer", 8f, -3f);
+
+        //Eidolon Stuff
         HealthKiPill = new ItemKiPill("health_ki_pill", Attributes.MAX_HEALTH, 0.01);
         SpiritGrowerPill = new ItemSpiritVeinPill("spirit_grower_pill", 100, 1, true);
         for (int i = 0; i < UnnamedMagitechMod.max_pill_level; i++) {
